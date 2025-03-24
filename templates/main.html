@@ -41,6 +41,80 @@
 
     <div id="error-message" class="alert alert-warning" style="display: none;"></div>
 
+    
+    <!-- Navigation Links -->
+    <div class="list-group">
+        <a href="/add_driver" class="list-group-item list-group-item-action">Add Driver</a>
+        <a href="/add_team" class="list-group-item list-group-item-action">Add Team</a>
+        <a href="/query_driver" class="list-group-item list-group-item-action">Query Drivers</a>
+        <a href="/query_team" class="list-group-item list-group-item-action">Query Teams</a>
+        <hr class="my-4">
+        <h4>Compare Drivers</h4>
+        <form id="compare-drivers-form" class="row g-2 mb-4" method="post" action="/compare_drivers_redirect">
+            <div class="col-md-5">
+                <input type="text" name="id1" class="form-control" placeholder="First Driver Name" required>
+            </div>
+            <div class="col-md-5">
+                <input type="text" name="id2" class="form-control" placeholder="Second Driver Name" required>
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-outline-primary w-100">Compare</button>
+            </div>
+        </form>
 
+        <h4>Compare Teams</h4>
+        <form id="compare-teams-form" class="row g-2" method="post" action="/compare_teams_redirect">
+            <div class="col-md-5">
+                <input type="text" name="id1" class="form-control" placeholder="First Team Name" required>
+            </div>
+            <div class="col-md-5">
+                <input type="text" name="id2" class="form-control" placeholder="Second Team Name" required>
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-outline-primary w-100">Compare</button>
+            </div>
+        </form>
+
+        <hr class="my-4">
+        <h4>All Drivers</h4>
+        <input type="text" id="driver-search" class="form-control mb-3" placeholder="Search drivers...">
+        <ul id="driver-list" class="list-group mb-4">
+            {% for driver in drivers %}
+            <li class="list-group-item">
+                <a href="/driver/{{ driver.name }}">{{ driver.name }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+
+        <h4>All Teams</h4>
+        <input type="text" id="team-search" class="form-control mb-3" placeholder="Search teams...">
+        <ul id="team-list" class="list-group">
+            {% for team in teams %}
+            <li class="list-group-item">
+                <a href="/team/{{ team.name }}">{{ team.name }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // Live search for drivers
+            $('#driver-search').on('input', function() {
+                const query = $(this).val().toLowerCase();
+                $('#driver-list li').filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(query) > -1);
+                });
+            });
+
+            // Live search for teams
+            $('#team-search').on('input', function() {
+                const query = $(this).val().toLowerCase();
+                $('#team-list li').filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(query) > -1);
+                });
+            });
+        });
+    </script>
 </body>
 </html>
