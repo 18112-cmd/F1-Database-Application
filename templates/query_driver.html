@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Query Drivers</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+</head>
+<body class="container mt-5">
+    <h2 class="mb-4">Query Drivers</h2>
+    <form method="post" action="/query_driver_results">
+        <div class="mb-3">
+            <label class="form-label">Attribute</label>
+            <select name="attribute" class="form-select" required>
+                <option value="age">Age</option>
+                <option value="pole_positions">Total Pole Positions</option>
+                <option value="race_wins">Total Race Wins</option>
+                <option value="points">Total Points Scored</option>
+                <option value="world_titles">Total World Titles</option>
+                <option value="fastest_laps">Total Fastest Laps</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Comparison</label>
+            <select name="operator" class="form-select" required>
+                <option value="==">Equal to (==)</option>
+                <option value=">">Greater than (>)</option>
+                <option value="<">Less than (<)</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Value</label>
+            <input type="number" name="value" class="form-control" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Query</button>
+    </form>
+</body>
+</html>
